@@ -45,7 +45,7 @@ namespace S10267362_PRG2Assignment
 
         public Flight() { }
 
-        public Flight(string flightNumber, string origin, string destination, DateTime expectedTime, string status)
+        public Flight(string flightNumber, string origin, string destination, DateTime expectedTime, string status = "Scheduled")
         {
             FlightNumber = flightNumber;
             Origin = origin;

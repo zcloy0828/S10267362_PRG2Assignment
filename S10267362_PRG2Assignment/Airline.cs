@@ -31,16 +31,16 @@ namespace S10267362_PRG2Assignment
 
         public Airline() { }
 
-        public Airline(string name, string code, Dictionary<string, Flight> flight) //add base here
+        public Airline(string name, string code)
         {
             Name = name;
             Code = code;
-            Flight = flight;
+            Flight = new Dictionary<string, Flight>();
         }
 
         public bool AddFlight(Flight flight)
         {
-            if (Flight.ContainsKey(flight.FlightNumber))
+            if (!Flight.ContainsKey(flight.FlightNumber))
             {
                 Flight.Add(flight.FlightNumber, flight);
                 return true;
@@ -71,7 +71,7 @@ namespace S10267362_PRG2Assignment
 
         public string Tostring()
         {
-            return "Name: " + name + "\tCode: " + code + "\tFlight : " + flight; //or flight.count (check later)
+            return $"Name: {name}\tCode: {code}\tFlights: {flight.Count}";
         }
 
     }

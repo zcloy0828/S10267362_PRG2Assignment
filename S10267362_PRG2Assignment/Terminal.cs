@@ -56,17 +56,28 @@ namespace S10267362_PRG2Assignment
 
         public bool AddAirline(Airline a)
         {
-            return true;
+            try
+            {
+                airlines.Add(a.Code, a); return true;
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Airline already exists in the terminal.");
+                return false;
+            }
         }
 
 
 
-        public void AddBoardingGate(BoardingGate gate, double fee)
+        public void AddBoardingGate(BoardingGate gate)
         {
-            if (!boardingGates.ContainsKey(gate.GateName))
+            try
             {
-                boardingGates[gate.GateName] = gate;
-                gateFees[gate.GateName] = fee;
+                boardingGates.Add(gate.GateName, gate);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Boarding gate already exists in the terminal.");
             }
         }
 
