@@ -156,6 +156,34 @@ void LoadFlights(Dictionary<string, Flight> flights, Terminal terminal)
 
 
 
+//Feature 3
+void DisplayFlightInfo(Terminal terminal, Dictionary<string, Flight> flight)
+{
+    // this checks whether the flights dictionary is empty or not
+    if (flights == null || flights.Count == 0)
+    {
+        Console.WriteLine("No flights available.");
+        return;
+    }
+
+    // Display header
+    Console.WriteLine("=============================================");
+    Console.WriteLine("List of Flights for Changi Airport Terminal 5");
+    Console.WriteLine("=============================================");
+    Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -25}",
+        "Flight Number", "Airline Name", "Origin", "Destination", "Expected Time");
+
+    // Loop through the flights dictionary and display each flight's details
+    foreach (KeyValuePair<string, Flight> flightEntry in flights)
+    {
+        {
+            // Display the flight details
+            Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -25}",
+                flightEntry.Key, terminal.GetAirlineFromFlight(flightEntry.Value).Name, flightEntry.Value.Origin, flightEntry.Value.Destination,
+                flightEntry.Value.ExpectedTime.ToString("g")); // Format the date/time
+        }
+    }
+}
 
 
 
