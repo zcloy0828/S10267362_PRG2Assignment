@@ -378,9 +378,27 @@ void DisplayFullFlightDetails()
     Console.WriteLine($"Destination:    {selectedFlight.Destination}");
     Console.WriteLine($"Expected Time:  {selectedFlight.ExpectedTime:dd/MM/yyyy hh:mm:ss tt}");
     Console.WriteLine($"Status:         {selectedFlight.Status}");
-    Console.WriteLine($"Special Code:   {(selectedFlight is NORMFlight ? "None" : ((dynamic)selectedFlight).RequestFee)}");
+    Console.Write("Special Code:   ");
+    if (selectedFlight is CFFTFlight cfft)
+    {
+        Console.WriteLine(cfft.RequestFee);
+    }
+    else if (selectedFlight is DDJBFlight ddjb)
+    {
+        Console.WriteLine(ddjb.RequestFee);
+    }
+    else if (selectedFlight is LWTTFlight lwtt)
+    {
+        Console.WriteLine(lwtt.RequestFee);
+    }
+    else
+    {
+        Console.WriteLine("None");
+    }
     Console.WriteLine("=============================================");
 }
+
+
 
 
 
