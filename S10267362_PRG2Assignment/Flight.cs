@@ -83,7 +83,7 @@ namespace S10267362_PRG2Assignment
 
         public override string ToString()
         {
-            return "FlightNumber: " + flightNumber + "\tOrigin: " + origin + "\tDestination: " + destination + "\tExpectedTime: " + expectedTime + "\tStatus: " + status;
+            return "FlightNumber: " + flightNumber + "\tOrigin: " + origin + "\tDestination: " + destination + "\tExpectedTime: " + expectedTime + "\tStatus: " + status + "\tBoardingGate: " + boardingGate;
         }
     }
 }

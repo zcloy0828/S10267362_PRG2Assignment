@@ -261,22 +261,11 @@ void NewFlight()
             return; 
         }
 
-        Console.Write("Enter Expected Departure/Arrival Time (e.g., 11:30 AM): ");
+        Console.Write("Enter Expected Departure/Arrival Time (e.g., 11:30 AM/PM): ");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime expectedTime))
         {
             Console.WriteLine("Invalid time format. Please try again.");
             return; 
-        }
-
-        Console.Write("Enter Flight Status (leave blank for 'On Time'): ");
-        string status = Console.ReadLine();
-        status = string.IsNullOrEmpty(status) ? "On Time" : status;
-
-        string[] validStatuses = { "On Time", "Delayed", "Boarding" };
-        while (!validStatuses.Contains(status))
-        {
-            Console.Write("Invalid status! Enter 'On Time', 'Delayed', or 'Boarding': ");
-            status = Console.ReadLine();
         }
 
 
@@ -288,19 +277,19 @@ void NewFlight()
 
         if (specialRequestCode == "DDJB")
         {
-            newFlight = new DDJBFlight(flightNumber, origin, destination, expectedTime, status);
+            newFlight = new DDJBFlight(flightNumber, origin, destination, expectedTime);
         }
         else if (specialRequestCode == "CFFT")
         {
-            newFlight = new CFFTFlight(flightNumber, origin, destination, expectedTime, status);
+            newFlight = new CFFTFlight(flightNumber, origin, destination, expectedTime);
         }
         else if (specialRequestCode == "LWTT")
         {
-            newFlight = new LWTTFlight(flightNumber, origin, destination, expectedTime, status);
+            newFlight = new LWTTFlight(flightNumber, origin, destination, expectedTime);
         }
         else
         {
-            newFlight = new NORMFlight(flightNumber, origin, destination, expectedTime, status);
+            newFlight = new NORMFlight(flightNumber, origin, destination, expectedTime);
         }
 
         flights.Add(flightNumber, newFlight);
