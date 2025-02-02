@@ -4,11 +4,11 @@
 
 
 
-Dictionary<string, Flight> flights = new Dictionary<string, Flight>();
-void LoadFlights()
+void LoadFlights(Dictionary<string, Flight> flights, Terminal terminal)
 {
     using (StreamReader sr = new StreamReader("flights.csv"))
     {
+        sr.ReadLine();
         string line;
         while ((line = sr.ReadLine()) != null)
         {
@@ -16,16 +16,34 @@ void LoadFlights()
             string flightNumber = parts[0];
             string origin = parts[1];
             string destination = parts[2];
-            DateTime expectedTime;
-            if (!DateTime.TryParse(parts[3], out expectedTime))
-            {
-                // Log or handle the invalid DateTime string
-                continue;
-            }
-            string status = parts[4];
+            DateTime expectedTime = DateTime.Parse(parts[3]);
+            string requestCode = parts[4];
 
-            DDJBFlight flight = new DDJBFlight(flightNumber, origin, destination, expectedTime, status);
-            flights.Add(flightNumber, flight);
+            if (requestCode == "DDJB")
+            {
+                Flight addFlight = new DDJBFlight(flightNumber, origin, destination, expectedTime);
+
+                flights.Add(flightNumber, addFlight);
+                terminal.GetAirlineFromFlight(addFlight).AddFlight(addFlight);
+            }
+            else if (requestCode == "CFFT")
+            {
+                Flight addFlight = new CFFTFlight(flightNumber, origin, destination, expectedTime);
+                flights.Add(flightNumber, addFlight);
+                terminal.GetAirlineFromFlight(addFlight).AddFlight(addFlight);
+            }
+            else if (requestCode == "LWTT")
+            {
+                Flight addFlight = new LWTTFlight(flightNumber, origin, destination, expectedTime);
+                flights.Add(flightNumber, addFlight);
+                terminal.GetAirlineFromFlight(addFlight).AddFlight(addFlight);
+            }
+            else
+            {
+                Flight addFlight = new NORMFlight(flightNumber, origin, destination, expectedTime);
+                flights.Add(flightNumber, addFlight);
+                terminal.GetAirlineFromFlight(addFlight).AddFlight(addFlight);
+            }
         }
     }
 }
