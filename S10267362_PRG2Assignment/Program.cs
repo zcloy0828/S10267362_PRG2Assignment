@@ -188,6 +188,36 @@ void DisplayFlightInfo(Terminal terminal, Dictionary<string, Flight> flight)
 
 
 
+//Feature 4 
+void DisplayBoardingGates()
+{
+    if (terminal5.BoardingGates == null || terminal5.BoardingGates.Count == 0)
+    {
+        Console.WriteLine("No boarding gates available.");
+        return;
+    }
+
+    Console.WriteLine("=============================================");
+    Console.WriteLine("List of Boarding Gates for Changi Airport Terminal 5");
+    Console.WriteLine("=============================================");
+    Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}", "Gate Name", "CFFT", "DDJB", "LWTT");
+
+    foreach (var gateEntry in terminal5.BoardingGates)
+    {
+        var gate = gateEntry.Value;
+        if (gate != null)
+        {
+            Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}",
+                gate.GateName, gate.SupportsCFFT, gate.SupportsDDJB, gate.SupportsLWTT);
+        }
+    }
+
+}
+
+
+
+
+
 
 
 
