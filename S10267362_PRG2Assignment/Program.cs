@@ -328,6 +328,85 @@ void NewFlight()
 
 
 
+//feature 7
+void DisplayFullFlightDetails()
+{
+    Console.WriteLine("=============================================");
+    Console.WriteLine("List of Airlines for Changi Airport Terminal 5");
+    Console.WriteLine("=============================================");
+    Console.WriteLine("{0, -15}{1, -30}", "Airline Code", "Airline Name");
+
+
+    foreach (var airline in terminal5.Airlines.Values)
+    {
+        Console.WriteLine("{0, -15}{1, -30}", airline.Code, airline.Name);
+    }
+
+
+    Console.Write("Enter Airline Code: ");
+    string airlineCode = Console.ReadLine();
+
+    if (string.IsNullOrWhiteSpace(airlineCode) || !terminal5.Airlines.ContainsKey(airlineCode))
+    {
+        Console.WriteLine("Invalid Airline Code. Please try again.");
+        return;
+    }
+
+    // this is to retrieve the selected airline
+    Airline selectedAirline = terminal5.Airlines[airlineCode];
+
+    Console.WriteLine("=============================================");
+    Console.WriteLine($"List of Flights for {selectedAirline.Name}");
+    Console.WriteLine("=============================================");
+    Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -30}",
+        "Flight Number", "Airline Name", "Origin", "Destination", "Expected Time");
+
+
+    if (selectedAirline.Flight == null || selectedAirline.Flight.Count == 0)
+    {
+        Console.WriteLine("No flights available for this airline.");
+        return;
+    }
+
+    foreach (var flight in selectedAirline.Flight.Values)
+    {
+        Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -30}",
+            flight.FlightNumber, selectedAirline.Name, flight.Origin, flight.Destination,
+            flight.ExpectedTime.ToString("dd/MM/yyyy hh:mm:ss tt"));
+    }
+
+    Console.Write("Enter a Flight Number to view full details: ");
+    string flightNumber = Console.ReadLine();
+
+    // to validate the flight number
+    if (string.IsNullOrWhiteSpace(flightNumber) || !selectedAirline.Flight.ContainsKey(flightNumber))
+    {
+        Console.WriteLine("Invalid Flight Number. Please try again.");
+        return;
+    }
+
+    Flight selectedFlight = selectedAirline.Flight[flightNumber];
+
+    Console.WriteLine("=============================================");
+    Console.WriteLine("Full Flight Details:");
+    Console.WriteLine("=============================================");
+    Console.WriteLine($"Flight Number:  {selectedFlight.FlightNumber}");
+    Console.WriteLine($"Airline Name:   {selectedAirline.Name}");
+    Console.WriteLine($"Origin:         {selectedFlight.Origin}");
+    Console.WriteLine($"Destination:    {selectedFlight.Destination}");
+    Console.WriteLine($"Expected Time:  {selectedFlight.ExpectedTime:dd/MM/yyyy hh:mm:ss tt}");
+    Console.WriteLine($"Status:         {selectedFlight.Status}");
+    Console.WriteLine($"Special Code:   {(selectedFlight is NORMFlight ? "None" : ((dynamic)selectedFlight).RequestFee)}");
+    Console.WriteLine("=============================================");
+}
+
+
+
+
+
+
+
+
 
 
 
