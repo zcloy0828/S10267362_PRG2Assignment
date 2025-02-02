@@ -221,9 +221,8 @@ void NewFlight()
         Console.WriteLine("Add a New Flight");
         Console.WriteLine("=============================================");
 
-        // Prompt for flight details
         Console.Write("Enter Flight Number: ");
-        string flightNumber = Console.ReadLine();
+        string flightNumber = Console.ReadLine().ToUpper();
 
         if (flightNumber.Length < 4)
         {
@@ -271,7 +270,7 @@ void NewFlight()
 
         // ask user for special request code
         Console.Write("Enter Special Request Code (leave blank for none): ");
-        string specialRequestCode = Console.ReadLine();
+        string specialRequestCode = Console.ReadLine().ToUpper();
 
         Flight newFlight;
 
@@ -326,7 +325,7 @@ void DisplayFullFlightDetails()
 
 
     Console.Write("Enter Airline Code: ");
-    string airlineCode = Console.ReadLine();
+    string airlineCode = Console.ReadLine().ToUpper();
 
     if (string.IsNullOrWhiteSpace(airlineCode) || !terminal5.Airlines.ContainsKey(airlineCode))
     {
@@ -358,7 +357,7 @@ void DisplayFullFlightDetails()
     }
 
     Console.Write("Enter a Flight Number to view full details: ");
-    string flightNumber = Console.ReadLine();
+    string flightNumber = Console.ReadLine().ToUpper();
 
     // to validate the flight number
     if (string.IsNullOrWhiteSpace(flightNumber) || !selectedAirline.Flight.ContainsKey(flightNumber))
