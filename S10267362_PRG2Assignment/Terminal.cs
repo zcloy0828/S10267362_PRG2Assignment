@@ -126,7 +126,7 @@ namespace S10267362_PRG2Assignment
                 double totalFees = 0;
                 double totalDiscounts = 0;
 
-                // Calculate the fees and discounts for the airline
+                // calculate the fees and discounts for the airline
                 foreach (var flight in airline.Flight.Values)
                 {
                     totalFees += flight.CalculateFees();
@@ -134,7 +134,7 @@ namespace S10267362_PRG2Assignment
 
                 int flightCount = airline.Flight.Count;
 
-                // Discounts for every third flight
+                // discounts for every third flight
                 if (flightCount >= 3)
                 {
                     totalDiscounts += 350 * (flightCount / 3);

@@ -24,7 +24,7 @@ while (true)
 
     string option = Console.ReadLine();
 
-    // Replace the switch with if-else
+
     if (option == "1")
     {
         Console.Clear();
@@ -64,7 +64,7 @@ while (true)
 
 void LoadAirlines()
 {
-    // Load airlines from airlines.csv
+
     using (StreamReader sr = new StreamReader("airlines.csv"))
     {
         sr.ReadLine();
@@ -72,11 +72,8 @@ void LoadAirlines()
         while ((line = sr.ReadLine()) != null)
         {
             string[] parts = line.Split(',');
-
             string airlineCode = parts[1];
             string airlineName = parts[0];
-            ;
-            // Create an Airline object and add it to the dictionary
             Airline airline = new Airline(airlineName, airlineCode);
             terminal5.Airlines.Add(airlineCode, airline);
         }
@@ -86,7 +83,6 @@ void LoadAirlines()
 
 void LoadBoardingGates(Dictionary<string, BoardingGate> boardingGates)
 {
-    // Load boarding gates from boardinggates.csv
     using (StreamReader sr = new StreamReader("boardinggates.csv"))
     {
         sr.ReadLine();
@@ -99,8 +95,6 @@ void LoadBoardingGates(Dictionary<string, BoardingGate> boardingGates)
             bool supportsCFFT = bool.Parse(parts[1]);
             bool supportsDDJB = bool.Parse(parts[2]);
             bool supportsLWTT = bool.Parse(parts[3]);
-
-            // Create a BoardingGate object and add it to the dictionary
             BoardingGate gate = new BoardingGate(gateName, supportsCFFT, supportsDDJB, supportsLWTT);
             boardingGates.Add(gateName, gate);
         }
@@ -173,14 +167,13 @@ void DisplayFlightInfo(Terminal terminal, Dictionary<string, Flight> flight)
     Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -25}",
         "Flight Number", "Airline Name", "Origin", "Destination", "Expected Time");
 
-    // Loop through the flights dictionary and display each flight's details
     foreach (KeyValuePair<string, Flight> flightEntry in flights)
     {
         {
-            // Display the flight details
+            // display the flight details
             Console.WriteLine("{0, -15}{1, -25}{2, -20}{3, -20}{4, -25}",
                 flightEntry.Key, terminal.GetAirlineFromFlight(flightEntry.Value).Name, flightEntry.Value.Origin, flightEntry.Value.Destination,
-                flightEntry.Value.ExpectedTime.ToString("g")); // Format the date/time
+                flightEntry.Value.ExpectedTime.ToString("g")); // format the date/time
         }
     }
 }
