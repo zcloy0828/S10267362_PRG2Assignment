@@ -42,7 +42,7 @@ namespace S10267362_PRG2Assignment
 
         public BoardingGate() { }
 
-        public BoardingGate(string gateName, bool supportsCFFT, bool supportsDDJB, bool supportsLWTT) //added Flight flight (daygene)
+        public BoardingGate(string gateName, bool supportsCFFT, bool supportsDDJB, bool supportsLWTT)
         {
             GateName = gateName;
             SupportsCFFT = supportsCFFT;
@@ -64,4 +64,3 @@ namespace S10267362_PRG2Assignment
         }
     }
 }
-

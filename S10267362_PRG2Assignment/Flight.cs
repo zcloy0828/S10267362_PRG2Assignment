@@ -43,6 +43,13 @@ namespace S10267362_PRG2Assignment
             set { status = value; }
         }
 
+        private string boardingGate;
+        public string BoardingGate
+        {
+            get { return boardingGate; }
+            set { boardingGate = value; }
+        }
+
         public Flight() { }
 
         public Flight(string flightNumber, string origin, string destination, DateTime expectedTime, string status = "Scheduled")
@@ -52,9 +59,26 @@ namespace S10267362_PRG2Assignment
             Destination = destination;
             ExpectedTime = expectedTime;
             Status = status;
+            BoardingGate = "";
+
+
         }
 
-        public virtual double CalculateFees() { return 0.0; }
+        public virtual double CalculateFees()
+        {
+            double baseFee = 0;
+            if (Destination == "Singapore (SIN)")
+            {
+                baseFee += 500; 
+            }
+            else if (Origin == "Singapore (SIN)")
+            {
+                baseFee += 800; 
+            }
+            baseFee += 300;
+
+            return baseFee;
+        }
 
 
         public override string ToString()

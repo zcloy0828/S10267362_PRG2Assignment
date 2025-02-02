@@ -16,7 +16,7 @@ namespace S10267362_PRG2Assignment
         }
 
         public LWTTFlight() { }
-        public LWTTFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status) : base(flightNumber, origin, destination, expectedTime, status)
+        public LWTTFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status = "Scheduled") : base(flightNumber, origin, destination, expectedTime, status)
         {
             RequestFee = 300;
         }
@@ -24,7 +24,10 @@ namespace S10267362_PRG2Assignment
 
         public override double CalculateFees()
         {
-            return base.CalculateFees();
+            double baseFee = base.CalculateFees(); 
+            baseFee += 500; 
+            return baseFee;
+
         }
 
         public override string ToString()
