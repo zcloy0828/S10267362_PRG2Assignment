@@ -25,6 +25,7 @@ void LoadAirlines()
 }
 
 
+
 void LoadBoardingGates(Dictionary<string, BoardingGate> boardingGates)
 {
     // Load boarding gates from boardinggates.csv
@@ -47,7 +48,6 @@ void LoadBoardingGates(Dictionary<string, BoardingGate> boardingGates)
         }
     }
 }
-
 
 
 
