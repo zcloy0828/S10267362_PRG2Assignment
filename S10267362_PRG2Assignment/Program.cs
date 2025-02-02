@@ -218,6 +218,116 @@ void DisplayBoardingGates()
 
 
 
+//feature 6
+void NewFlight()
+{
+    string[] validAirlineCodes = { "SQ", "MH", "JL", "CX", "QF", "TR", "EK", "BA" };
+    while (true)
+    {
+        Console.WriteLine("=============================================");
+        Console.WriteLine("Add a New Flight");
+        Console.WriteLine("=============================================");
+
+        // Prompt for flight details
+        Console.Write("Enter Flight Number: ");
+        string flightNumber = Console.ReadLine();
+
+        if (flightNumber.Length < 4)
+        {
+            Console.WriteLine("Error: Flight number must have 5 characters (Eg SQ 115). Please try again.");
+            continue;
+        }
+
+        string airlineCode = flightNumber.Substring(0, 2).ToUpper();  //this is to retrive the first two letters
+
+        if (!validAirlineCodes.Contains(airlineCode))
+        {
+            Console.WriteLine("Error: Invalid airline code. Please try again.");
+            continue;
+        }
+
+        if (flights.ContainsKey(flightNumber))
+        {
+            Console.WriteLine("Error: Flight number already exists. Please try again.");
+            continue; 
+        }
+
+        Console.Write("Enter Origin: ");
+        string origin = Console.ReadLine();
+        if (string.IsNullOrEmpty(origin))
+        {
+            Console.WriteLine("Error: Origin cannot be empty. Please try again.");
+            return;  
+        }
+
+        Console.Write("Enter Destination: ");
+        string destination = Console.ReadLine();
+        if (string.IsNullOrEmpty(destination))
+        {
+            Console.WriteLine("Error: Destination cannot be empty. Please try again.");
+            return; 
+        }
+
+        Console.Write("Enter Expected Departure/Arrival Time (e.g., 11:30 AM): ");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime expectedTime))
+        {
+            Console.WriteLine("Invalid time format. Please try again.");
+            return; 
+        }
+
+        Console.Write("Enter Flight Status (leave blank for 'On Time'): ");
+        string status = Console.ReadLine();
+        status = string.IsNullOrEmpty(status) ? "On Time" : status;
+
+        string[] validStatuses = { "On Time", "Delayed", "Boarding" };
+        while (!validStatuses.Contains(status))
+        {
+            Console.Write("Invalid status! Enter 'On Time', 'Delayed', or 'Boarding': ");
+            status = Console.ReadLine();
+        }
+
+
+        // ask user for special request code
+        Console.Write("Enter Special Request Code (leave blank for none): ");
+        string specialRequestCode = Console.ReadLine();
+
+        Flight newFlight;
+
+        if (specialRequestCode == "DDJB")
+        {
+            newFlight = new DDJBFlight(flightNumber, origin, destination, expectedTime, status);
+        }
+        else if (specialRequestCode == "CFFT")
+        {
+            newFlight = new CFFTFlight(flightNumber, origin, destination, expectedTime, status);
+        }
+        else if (specialRequestCode == "LWTT")
+        {
+            newFlight = new LWTTFlight(flightNumber, origin, destination, expectedTime, status);
+        }
+        else
+        {
+            newFlight = new NORMFlight(flightNumber, origin, destination, expectedTime, status);
+        }
+
+        flights.Add(flightNumber, newFlight);
+        terminal5.GetAirlineFromFlight(newFlight).AddFlight(newFlight);
+        Console.WriteLine($"Flight {flightNumber} has been added!");
+        Console.WriteLine("Would you like to add another flight? (Y/N): ");
+        string repeat = Console.ReadLine();
+        if (repeat == "Y")
+        {
+            NewFlight();
+        }
+        break;
+
+    }
+}
+
+
+
+
+
 
 
 
