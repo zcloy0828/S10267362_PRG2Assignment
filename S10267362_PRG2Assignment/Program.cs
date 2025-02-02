@@ -297,7 +297,7 @@ void NewFlight()
         Console.WriteLine($"Flight {flightNumber} has been added!");
         Console.WriteLine("Would you like to add another flight? (Y/N): ");
         string repeat = Console.ReadLine();
-        if (repeat == "Y")
+        if (repeat.ToUpper() == "Y")
         {
             NewFlight();
         }
